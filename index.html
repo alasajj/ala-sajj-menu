@@ -1,252 +1,194 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>A LA SAJJ — Menu</title>
-  <meta name="description" content="A LA SAJJ - QR Menu" />
+  <meta name="description" content="A LA SAJJ QR Menu" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <header class="top">
-    <div class="brand">
-      <!-- Optional logo -->
-      <!-- <img class="logo" src="images/logo.png" alt="A LA SAJJ Logo"> -->
-      <div>
-        <h1>A LA SAJJ</h1>
-        <p class="subtitle">Scan. Choose. Enjoy.</p>
-      </div>
-    </div>
-
-    <div class="info">
-      <a class="chip" href="tel:+96176377639">📞 76 377 639</a>
-      <a class="chip" href="https://www.instagram.com/alasajj.beirut/" target="_blank" rel="noopener">📷 @alasajj.beirut</a>
-      <!-- Optional map link (replace with your real Google Maps link) -->
-      <!-- <a class="chip" href="https://maps.google.com/?q=A+LA+SAJJ" target="_blank" rel="noopener">📍 Location</a> -->
-    </div>
+  <!-- Top logo only -->
+  <header class="topbar">
+    <img src="logo.png" alt="A LA SAJJ" class="logo" />
+    <p class="tagline">Tap items to calculate your total</p>
   </header>
-
-  <nav class="nav">
-    <a href="#breakfast">A LA PETIT DÉJ</a>
-    <a href="#sandwiches">SANDWICHES</a>
-    <a href="#italiana">A L’ITALIANA</a>
-    <a href="#sweet">A LA SUCRÉE</a>
-  </nav>
 
   <main class="container">
 
-    <section class="card" id="breakfast">
-      <div class="card-title">
+    <!-- Section: Petit Déj -->
+    <section class="section" id="petitdej">
+      <div class="section-head">
         <h2>A LA PETIT DÉJ</h2>
-        <span class="tag">Morning favorites</span>
+        <span class="hint">click items</span>
       </div>
 
-      <div class="menu">
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Zaatar Baladeh</div>
-          </div>
-          <div class="price">90,000</div>
-        </div>
+      <div class="grid">
+        <button class="item" data-name="Zaatar Baladeh" data-price="90000" type="button">
+          <span class="name">Zaatar Baladeh</span>
+          <span class="price">90,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Zaatar Halabeh</div>
-          </div>
-          <div class="price">110,000</div>
-        </div>
+        <button class="item" data-name="Zaatar Halabeh" data-price="110000" type="button">
+          <span class="name">Zaatar Halabeh</span>
+          <span class="price">110,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Zaatar &amp; Cheese</div>
-          </div>
-          <div class="price">180,000</div>
-        </div>
+        <button class="item" data-name="Zaatar & Cheese" data-price="180000" type="button">
+          <span class="name">Zaatar &amp; Cheese</span>
+          <span class="price">180,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Akaoui</div>
-          </div>
-          <div class="price">180,000</div>
-        </div>
+        <button class="item" data-name="Akaoui" data-price="180000" type="button">
+          <span class="name">Akaoui</span>
+          <span class="price">180,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Akaoui <span class="badge">🌶️ spicy</span></div>
-          </div>
-          <div class="price">225,000</div>
-        </div>
+        <button class="item" data-name="Akaoui (Spicy)" data-price="225000" type="button">
+          <span class="name">Akaoui <span class="chip">🌶️ spicy</span></span>
+          <span class="price">225,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Double Cheese</div>
-            <div class="desc">Mozzarella, Akaoui</div>
-          </div>
-          <div class="price">270,000</div>
-        </div>
+        <button class="item" data-name="Double Cheese" data-price="270000" type="button">
+          <span class="name">Double Cheese</span>
+          <span class="price">270,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Turkey or Ham &amp; Cheese</div>
-          </div>
-          <div class="price">270,000</div>
-        </div>
+        <button class="item" data-name="Turkey or Ham & Cheese" data-price="270000" type="button">
+          <span class="name">Turkey or Ham &amp; Cheese</span>
+          <span class="price">270,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Labneh</div>
-          </div>
-          <div class="price">180,000</div>
-        </div>
+        <button class="item" data-name="Labneh" data-price="180000" type="button">
+          <span class="name">Labneh</span>
+          <span class="price">180,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Feta</div>
-            <div class="desc">Zaatar, Tomato, Bakle, Sumac</div>
-          </div>
-          <div class="price">225,000</div>
-        </div>
+        <button class="item" data-name="Feta" data-price="225000" type="button">
+          <span class="name">Feta <span class="sub">Zaatar, Tomato, Bakle, Sumac</span></span>
+          <span class="price">225,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Halloumi</div>
-            <div class="desc">Tomato, Olives</div>
-          </div>
-          <div class="price">225,000</div>
-        </div>
+        <button class="item" data-name="Halloumi" data-price="225000" type="button">
+          <span class="name">Halloumi <span class="sub">Tomato, Olives</span></span>
+          <span class="price">225,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Awarma &amp; Labneh</div>
-          </div>
-          <div class="price">300,000</div>
-        </div>
+        <button class="item" data-name="Awarma & Labneh" data-price="300000" type="button">
+          <span class="name">Awarma &amp; Labneh</span>
+          <span class="price">300,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Awarma &amp; Cheese</div>
-          </div>
-          <div class="price">300,000</div>
-        </div>
+        <button class="item" data-name="Awarma & Cheese" data-price="300000" type="button">
+          <span class="name">Awarma &amp; Cheese</span>
+          <span class="price">300,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Lahm b Ajin</div>
-          </div>
-          <div class="price">230,000</div>
-        </div>
+        <button class="item" data-name="Lahm b Ajin" data-price="230000" type="button">
+          <span class="name">Lahm b Ajin</span>
+          <span class="price">230,000</span>
+        </button>
       </div>
     </section>
 
-    <section class="card" id="sandwiches">
-      <div class="card-title">
+    <!-- Section: Sandwiches -->
+    <section class="section" id="sandwiches">
+      <div class="section-head">
         <h2>SANDWICHES</h2>
-        <span class="tag">Savory</span>
+        <span class="hint">click items</span>
       </div>
 
-      <div class="menu">
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Rosto &amp; Cheese</div>
-            <div class="desc">Tomato, Pickles, Corn, Mayo, Mustard</div>
-          </div>
-          <div class="price">360,000</div>
-        </div>
+      <div class="grid">
+        <button class="item" data-name="Rosto & Cheese" data-price="360000" type="button">
+          <span class="name">Rosto &amp; Cheese <span class="sub">Tomato, Pickles, Corn, Mayo, Mustard</span></span>
+          <span class="price">360,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Chicken Sub</div>
-            <div class="desc">Marinated Chicken Breast, Mozzarella, Iceberg, Tomato, Pickles, Corn, Mayo</div>
-          </div>
-          <div class="price">360,000</div>
-        </div>
+        <button class="item" data-name="Chicken Sub" data-price="360000" type="button">
+          <span class="name">Chicken Sub <span class="sub">Marinated chicken, mozzarella, iceberg, tomato, pickles, corn, mayo</span></span>
+          <span class="price">360,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Submarine</div>
-            <div class="desc">Mozzarella, Salami, Turkey or Ham, Iceberg, Tomato, Pickles, Corn, Mayo</div>
-          </div>
-          <div class="price">360,000</div>
-        </div>
+        <button class="item" data-name="Submarine" data-price="360000" type="button">
+          <span class="name">Submarine <span class="sub">Mozzarella, salami, turkey or ham, iceberg, tomato, pickles, corn, mayo</span></span>
+          <span class="price">360,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Soujouk &amp; Cheese</div>
-            <div class="desc">Tomato, Pickles, Mayo</div>
-          </div>
-          <div class="price">360,000</div>
-        </div>
+        <button class="item" data-name="Soujouk & Cheese" data-price="360000" type="button">
+          <span class="name">Soujouk &amp; Cheese <span class="sub">Tomato, pickles, mayo</span></span>
+          <span class="price">360,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Kafta &amp; Cheese</div>
-            <div class="desc">Tomato, Pickles, Mayo, Sumac</div>
-          </div>
-          <div class="price">380,000</div>
-        </div>
+        <button class="item" data-name="Kafta & Cheese" data-price="380000" type="button">
+          <span class="name">Kafta &amp; Cheese <span class="sub">Tomato, pickles, mayo, sumac</span></span>
+          <span class="price">380,000</span>
+        </button>
       </div>
     </section>
 
-    <section class="card" id="italiana">
-      <div class="card-title">
+    <!-- Section: Italiana -->
+    <section class="section" id="italiana">
+      <div class="section-head">
         <h2>A L’ITALIANA</h2>
-        <span class="tag">Pizza</span>
+        <span class="hint">click items</span>
       </div>
 
-      <div class="menu">
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Lebanese Pizza</div>
-            <div class="desc">Homemade sauce, Olive, Green pepper, Turkey or Ham, Mozzarella, Oregano</div>
-          </div>
-          <div class="price">450,000</div>
-        </div>
+      <div class="grid">
+        <button class="item" data-name="Lebanese Pizza" data-price="450000" type="button">
+          <span class="name">Lebanese Pizza <span class="sub">Homemade sauce, olive, green pepper, turkey or ham, mozzarella, oregano</span></span>
+          <span class="price">450,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Pepperoni Pizza</div>
-            <div class="desc">Homemade sauce, Mozzarella, Pepperoni, Oregano</div>
-          </div>
-          <div class="price">450,000</div>
-        </div>
+        <button class="item" data-name="Pepperoni Pizza" data-price="450000" type="button">
+          <span class="name">Pepperoni Pizza <span class="sub">Homemade sauce, mozzarella, pepperoni, oregano</span></span>
+          <span class="price">450,000</span>
+        </button>
       </div>
     </section>
 
-    <section class="card" id="sweet">
-      <div class="card-title">
+    <!-- Section: Sucrée -->
+    <section class="section" id="sweet">
+      <div class="section-head">
         <h2>A LA SUCRÉE</h2>
-        <span class="tag">Sweet</span>
+        <span class="hint">click items</span>
       </div>
 
-      <div class="menu">
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Chocobanane</div>
-          </div>
-          <div class="price">270,000</div>
-        </div>
+      <div class="grid">
+        <button class="item" data-name="Chocobanane" data-price="270000" type="button">
+          <span class="name">Chocobanane</span>
+          <span class="price">270,000</span>
+        </button>
 
-        <div class="item">
-          <div class="item-left">
-            <div class="name">Mozzarella A La Nutella</div>
-          </div>
-          <div class="price">320,000</div>
-        </div>
+        <button class="item" data-name="Mozzarella A La Nutella" data-price="320000" type="button">
+          <span class="name">Mozzarella A La Nutella</span>
+          <span class="price">320,000</span>
+        </button>
       </div>
     </section>
 
     <footer class="footer">
-      <div class="footer-inner">
-        <div>© <span id="year"></span> A LA SAJJ</div>
-        <div class="small">Prices in LBP • Menu subject to change</div>
-      </div>
+      <div class="muted">Prices in LBP • Tap items to estimate total (not checkout)</div>
     </footer>
   </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <!-- Bottom total bar -->
+  <aside class="totalbar" aria-live="polite">
+    <div class="total-left">
+      <div class="total-title">Selected</div>
+      <div class="total-sub" id="summary">No items selected</div>
+    </div>
+
+    <div class="total-right">
+      <div class="total-amount">
+        <span class="muted small">Total</span>
+        <span class="amount" id="total">0</span>
+      </div>
+      <button class="btn" id="clear" type="button">Clear</button>
+      <button class="btn primary" id="copy" type="button">Copy</button>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
 </body>
 </html>
-
