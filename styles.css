@@ -56,8 +56,9 @@ body{
 .container{
   max-width: 960px;
   margin: 0 auto;
-  padding: 14px 14px 120px;
+  padding: 240px 14px 120px; /* <-- was 14px 14px 120px */
 }
+
 .section{
   margin-top: 18px;
 }
@@ -305,10 +306,6 @@ body{
   border-color: rgba(214,178,58,.35);
 }
 
-/* better anchor scroll position because topbar is sticky */
-.section{
-  scroll-margin-top: 190px;
-}
 
 /* Prevent purple/blue visited-link colors on our menu buttons */
 .section-btn,
@@ -385,12 +382,12 @@ body{
 html {
   scroll-behavior: smooth;
 }
-.section { scroll-margin-top: 220px; }
+.section { scroll-margin-top: 260px; }
 
 @media (min-width: 768px) {
-  .section { scroll-margin-top: 160px; }
+  .section { scroll-margin-top: 200px; }
 }
 html { scroll-behavior: smooth; }
-.section { scroll-margin-top: 240px; } /* fallback */
+
 
 
