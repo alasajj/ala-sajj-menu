@@ -396,3 +396,6 @@ html{ scroll-behavior:smooth; }
   border-color: rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.08);
 }
+#petitdej{
+  padding-top: 12px;
+}
