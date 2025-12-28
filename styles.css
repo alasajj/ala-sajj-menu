@@ -306,8 +306,34 @@ body{
   border-color: rgba(214,178,58,.35);
 }
 
+html{ scroll-behavior:smooth; }
 
-/* Prevent purple/blue visited-link colors on our menu buttons */
+
+/* Make topbar full width */
+.topbar{
+  left: 0;
+  right: 0;
+}
+
+/* Layout spacing for fixed topbar */
+.container{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 240px 14px 120px;
+}
+
+@media (min-width: 768px){
+  .container{ padding-top: 190px; }
+}
+
+/* Better anchor scroll position because topbar is fixed */
+.section{ scroll-margin-top: 260px; }
+
+@media (min-width: 768px){
+  .section{ scroll-margin-top: 200px; }
+}
+
+/* Prevent purple/blue visited-link colors */
 .section-btn,
 .section-btn:link,
 .section-btn:visited,
@@ -322,29 +348,20 @@ body{
 .pill:link,
 .pill:visited,
 .pill:hover,
-.pill:active {
-  color: inherit;
-  text-decoration: none;
-}
-/* --- Fix visited link purple + make section buttons look like pills --- */
-.section-btn,
-.section-btn:link,
-.section-btn:visited,
-.section-btn:hover,
-.section-btn:active {
+.pill:active{
   color: inherit;
   text-decoration: none;
 }
 
 /* Pill / box style for section title links */
-.section-buttons {
+.section-buttons{
   display: flex;
   gap: 10px;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.section-btn {
+.section-btn{
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -358,36 +375,21 @@ body{
   line-height: 1;
 }
 
-/* Hover / focus */
-.section-btn:hover {
+.section-btn:hover{
   background: rgba(255,255,255,0.09);
 }
 
-.section-btn:focus-visible {
+.section-btn:focus-visible{
   outline: 2px solid rgba(255,255,255,0.25);
   outline-offset: 2px;
 }
 
-/* "Top" button slightly quieter */
-.section-btn.top {
+.section-btn.top{
   font-weight: 600;
   background: rgba(255,255,255,0.04);
 }
 
-/* Optional: highlight the "active" section title a bit */
-.section-btn.active {
+.section-btn.active{
   border-color: rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.08);
 }
-html {
-  scroll-behavior: smooth;
-}
-.section { scroll-margin-top: 260px; }
-
-@media (min-width: 768px) {
-  .section { scroll-margin-top: 200px; }
-}
-html { scroll-behavior: smooth; }
-
-
-
