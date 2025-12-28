@@ -216,6 +216,22 @@
 
   <script src="app.js"></script>
 
+  <script>
+    (function () {
+      const nav = document.querySelector('.nav');
+      if (!nav) return;
+
+      document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.navbtn');
+        if (!btn) return;
+
+        // If the button is partly off-screen inside the nav, scroll it into view
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+    })();
+  </script>
+
+
   <!-- Hide logo when scrolling down -->
   <script>
     (function () {

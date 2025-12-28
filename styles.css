@@ -279,13 +279,22 @@ body{
 
 /* navigation */
 .nav{
+.nav{
   display:flex;
   gap:10px;
-  justify-content:center;
+  justify-content:flex-start;      /* important for horizontal scrolling */
   overflow-x:auto;
-  padding: 8px 2px 2px;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 12px 2px;           /* more left/right padding */
   margin: 2px auto 6px;
   max-width: 960px;
+
+  scroll-snap-type: x mandatory;   /* nice snapping */
+}
+
+.navbtn{
+  flex: 0 0 auto;                  /* prevents shrinking */
+  scroll-snap-align: start;        /* snap each pill */
 }
 
 .navbtn{
