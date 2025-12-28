@@ -9,9 +9,11 @@
 </head>
 
 <body>
+  <div id="top"></div>
+
   <!-- Top logo only -->
-  <header class="topbar">
-    <img src="logo.png" alt="A LA SAJJ" class="logo" />
+  <header class="topbar" id="topbar">
+    <img src="logo.png" alt="A LA SAJJ" class="logo" id="topLogo" />
 
     <div class="links">
       <a class="pill" href="tel:+96176377639">📞 76 377 639</a>
@@ -20,12 +22,12 @@
 
     <nav class="nav">
       <a class="navbtn" href="#petitdej">A LA PETIT DÉJ</a>
-      <a class="navbtn" href="#sandwiches">SANDWICHES</a>
+      <a class="navbtn" href="#alalibanaise">A LA LIBANAISE</a>
       <a class="navbtn" href="#italiana">A L’ITALIANA</a>
       <a class="navbtn" href="#sweet">A LA SUCRÉE</a>
     </nav>
 
-    <p class="tagline">Tap items to calculate your total</p>
+    <p class="tagline"> </p>
   </header>
 
 
@@ -34,9 +36,12 @@
     <!-- Section: Petit Déj -->
     <section class="section" id="petitdej">
       <div class="section-head">
-        <h2>A LA PETIT DÉJ</h2>
-        <span class="hint">click items</span>
+        <div class="section-buttons">
+          <a class="section-btn active" href="#petitdej">A LA PETIT DÉJ</a>
+          <a class="section-btn top" href="#top">↑ Top</a>
+        </div>
       </div>
+
 
       <div class="grid">
         <button class="item" data-name="Zaatar Baladeh" data-price="90000" type="button">
@@ -106,11 +111,13 @@
       </div>
     </section>
 
-    <!-- Section: Sandwiches -->
-    <section class="section" id="sandwiches">
+    <!-- Section: A LA LIBANAISE -->
+    <section class="section" id="alalibanaise">
       <div class="section-head">
-        <h2>SANDWICHES</h2>
-        <span class="hint">click items</span>
+        <div class="section-buttons">
+          <a class="section-btn active" href="#alalibanaise">A LA LIBANAISE</a>
+          <a class="section-btn top" href="#top">↑ Top</a>
+        </div>
       </div>
 
       <div class="grid">
@@ -144,8 +151,10 @@
     <!-- Section: Italiana -->
     <section class="section" id="italiana">
       <div class="section-head">
-        <h2>A L’ITALIANA</h2>
-        <span class="hint">click items</span>
+        <div class="section-buttons">
+          <a class="section-btn active" href="#italiana">ITALIANA</a>
+          <a class="section-btn top" href="#top">↑ Top</a>
+        </div>
       </div>
 
       <div class="grid">
@@ -164,8 +173,10 @@
     <!-- Section: Sucrée -->
     <section class="section" id="sweet">
       <div class="section-head">
-        <h2>A LA SUCRÉE</h2>
-        <span class="hint">click items</span>
+        <div class="section-buttons">
+          <a class="section-btn active" href="#sweet">A LA SUCRÉE</a>
+          <a class="section-btn top" href="#top">↑ Top</a>
+        </div>
       </div>
 
       <div class="grid">
@@ -204,5 +215,76 @@
   </aside>
 
   <script src="app.js"></script>
+
+  <!-- Hide logo when scrolling down -->
+  <script>
+    (function () {
+      const logo = document.getElementById('topLogo');
+      if (!logo) return;
+
+      function onScroll() {
+        // hides after you scroll ~60px (you can change this number)
+        if (window.scrollY > 60) {
+          logo.style.opacity = '0';
+          logo.style.pointerEvents = 'none';
+          logo.style.height = '0';
+          logo.style.margin = '0';
+        } else {
+          logo.style.opacity = '';
+          logo.style.pointerEvents = '';
+          logo.style.height = '';
+          logo.style.margin = '';
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+<script>
+  (function () {
+    const header = document.getElementById('topbar');
+
+    function getOffset() {
+      const h = header ? header.getBoundingClientRect().height : 0;
+      return Math.ceil(h + 16); // +16px breathing room
+    }
+
+    function scrollToHash(hash) {
+      if (!hash || hash === '#') return;
+      const el = document.querySelector(hash);
+      if (!el) return;
+
+      const y = el.getBoundingClientRect().top + window.pageYOffset - getOffset();
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    // Intercept clicks on internal anchor links
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+
+      const hash = a.getAttribute('href');
+      if (!hash || hash.length < 2) return;
+
+      e.preventDefault();
+      history.pushState(null, '', hash);
+      scrollToHash(hash);
+    });
+
+    // If page loads with a hash (e.g., opening directly at #petitdej)
+    window.addEventListener('load', function () {
+      if (location.hash) {
+        setTimeout(() => scrollToHash(location.hash), 50);
+      }
+    });
+
+    // Handle back/forward navigation with hashes
+    window.addEventListener('hashchange', function () {
+      scrollToHash(location.hash);
+    });
+  })();
+</script>
+
 </body>
 </html>
