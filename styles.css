@@ -313,6 +313,9 @@ html{ scroll-behavior:smooth; }
 .topbar{
   left: 0;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* THIS fixes the centering */
 }
 
 /* Layout spacing for fixed topbar */
