@@ -219,72 +219,22 @@
   <!-- Hide logo when scrolling down -->
   <script>
     (function () {
-      const logo = document.getElementById('topLogo');
-      if (!logo) return;
+      const header = document.getElementById('topbar');
+      if (!header) return;
 
-      function onScroll() {
-        // hides after you scroll ~60px (you can change this number)
-        if (window.scrollY > 60) {
-          logo.style.opacity = '0';
-          logo.style.pointerEvents = 'none';
-          logo.style.height = '0';
-          logo.style.margin = '0';
-        } else {
-          logo.style.opacity = '';
-          logo.style.pointerEvents = '';
-          logo.style.height = '';
-          logo.style.margin = '';
-        }
+      function setHeaderHeightVar() {
+        const h = Math.ceil(header.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--header-h', h + 'px');
       }
 
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      window.addEventListener('load', setHeaderHeightVar);
+      window.addEventListener('resize', setHeaderHeightVar);
+      window.addEventListener('orientationchange', setHeaderHeightVar);
+      window.addEventListener('scroll', setHeaderHeightVar, { passive: true });
+
+      setHeaderHeightVar();
     })();
   </script>
-<script>
-  (function () {
-    const header = document.getElementById('topbar');
-
-    function getOffset() {
-      const h = header ? header.getBoundingClientRect().height : 0;
-      return Math.ceil(h + 16); // +16px breathing room
-    }
-
-    function scrollToHash(hash) {
-      if (!hash || hash === '#') return;
-      const el = document.querySelector(hash);
-      if (!el) return;
-
-      const y = el.getBoundingClientRect().top + window.pageYOffset - getOffset();
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-
-    // Intercept clicks on internal anchor links
-    document.addEventListener('click', function (e) {
-      const a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-
-      const hash = a.getAttribute('href');
-      if (!hash || hash.length < 2) return;
-
-      e.preventDefault();
-      history.pushState(null, '', hash);
-      scrollToHash(hash);
-    });
-
-    // If page loads with a hash (e.g., opening directly at #petitdej)
-    window.addEventListener('load', function () {
-      if (location.hash) {
-        setTimeout(() => scrollToHash(location.hash), 50);
-      }
-    });
-
-    // Handle back/forward navigation with hashes
-    window.addEventListener('hashchange', function () {
-      scrollToHash(location.hash);
-    });
-  })();
-</script>
 
 </body>
 </html>

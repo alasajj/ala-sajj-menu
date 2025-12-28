@@ -400,3 +400,16 @@ html{ scroll-behavior:smooth; }
 .section:first-of-type{
   padding-top: 24px;
 }
+
+:root{
+  --header-h: 240px; /* fallback */
+}
+
+.container{
+  padding-top: calc(var(--header-h) + 14px);
+}
+
+/* Anchor targets stop below the header */
+.section{
+  scroll-margin-top: calc(var(--header-h) + 18px);
+}
