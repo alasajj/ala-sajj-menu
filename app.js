@@ -1,31 +1,3 @@
-function formatLBP(n){
-  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-const selected = new Map(); // name -> price
-
-function updateTotal(){
-  let total = 0;
-  const names = [];
-
-  for (const [name, price] of selected.entries()){
-    total += price;
-    names.push(name);
-  }
-
-  document.getElementById("total").textContent = formatLBP(total);
-
-  const summaryEl = document.getElementById("summary");
-  if (names.length === 0){
-    summaryEl.textContent = "No items selected";
-    return;
-  }
-
-  // Keep it short in the bar
-  const summary = names.slice(0, 3).join(", ");
-  summaryEl.textContent = names.length > 3 ? `${summary}…` : summary;
-}
-
 // app.js
 document.addEventListener("DOMContentLoaded", () => {
   const itemButtons = document.querySelectorAll(".item");
@@ -33,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalEl = document.getElementById("total");
   const clearBtn = document.getElementById("clear");
   const copyBtn = document.getElementById("copy");
+  const cartEl = document.getElementById("cart");
+
 
   // cart: { "Zaatar Baladeh": { price: 90000, qty: 2 } }
   const cart = {};
@@ -55,8 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cartIsEmpty()) {
       summaryEl.textContent = "No items selected";
       totalEl.textContent = "0";
+      if (cartEl) cartEl.innerHTML = "";
       return;
     }
+
+    // Keep summary text short in the bar
+    const names = Object.keys(cart);
+    const short = names.slice(0, 3).join(", ");
+    summaryEl.textContent = names.length > 3 ? `${short}…` : short;
 
     // Build the list with - qty +
     const rows = Object.entries(cart)
@@ -80,9 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .join("");
 
-    summaryEl.innerHTML = `<div class="cart">${rows}</div>`;
+    if (cartEl) cartEl.innerHTML = rows;
     totalEl.textContent = fmt(totalAmount());
   }
+
 
   function addItem(name, price) {
     if (!cart[name]) cart[name] = { price, qty: 0 };
@@ -107,19 +88,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Handle + / - clicks inside the summary area (event delegation)
-  summaryEl.addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-action]");
-    if (!btn) return;
+  // Handle + / - clicks inside the cart list (event delegation)
+     (cartEl || document).addEventListener("click", (e) => {
+       const btn = e.target.closest("button[data-action]");
+       if (!btn) return;
 
-    const row = e.target.closest(".cart-row");
+       const row = e.target.closest(".cart-row");
     if (!row) return;
 
-    const name = unescapeHtml(row.getAttribute("data-name"));
-    const action = btn.dataset.action;
+        const name = unescapeHtml(row.getAttribute("data-name"));
+        const action = btn.dataset.action;
 
-    if (action === "plus") changeQty(name, +1);
-    if (action === "minus") changeQty(name, -1);
-  });
+        if (action === "plus") changeQty(name, +1);
+        if (action === "minus") changeQty(name, -1);
+     });
+
 
   // Clear
   clearBtn.addEventListener("click", () => {

@@ -256,36 +256,49 @@
     </footer>
   </main>
 
-  <!-- Bottom total bar -->
-  <aside class="totalbar" aria-live="polite">
-    <div class="total-left">
-      <div class="total-title">Selected</div>
-      <div class="total-sub" id="summary">No items selected</div>
+  <!-- Bottom total bar (tap to open drawer) -->
+  <aside class="totalbar" aria-live="polite" id="totalbar">
+
+    <button class="totalbar-toggle" id="drawerToggle" type="button" aria-expanded="false">
+      <div class="total-left">
+        <div class="total-title">Selected</div>
+        <div class="total-sub" id="summary">No items selected</div>
+      </div>
+
+      <div class="total-right">
+        <div class="total-amount">
+          <span class="muted small">Total</span>
+          <span class="amount" id="total">0</span>
+        </div>
+        <span class="chev" aria-hidden="true">⌃</span>
+      </div>
+    </button>
+
+    <!-- Drawer content -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-actions">
+        <button class="btn" id="clear" type="button">Clear</button>
+        <button class="btn primary" id="copy" type="button">Copy</button>
+      </div>
+
+      <!-- This is where selected items will render -->
+      <div class="cart" id="cart"></div>
     </div>
 
-    <div class="total-right">
-      <div class="total-amount">
-        <span class="muted small">Total</span>
-        <span class="amount" id="total">0</span>
-      </div>
-      <button class="btn" id="clear" type="button">Clear</button>
-      <button class="btn primary" id="copy" type="button">Copy</button>
-    </div>
   </aside>
+
 
   <script src="app.js"></script>
 
   <script>
     (function () {
-      const nav = document.querySelector('.nav');
-      if (!nav) return;
+      const totalbar = document.getElementById('totalbar');
+      const toggle = document.getElementById('drawerToggle');
+      if (!totalbar || !toggle) return;
 
-      document.addEventListener('click', function (e) {
-        const btn = e.target.closest('.navbtn');
-        if (!btn) return;
-
-        // If the button is partly off-screen inside the nav, scroll it into view
-        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      toggle.addEventListener('click', () => {
+        const isOpen = totalbar.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
     })();
   </script>

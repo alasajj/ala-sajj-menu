@@ -469,3 +469,98 @@ html{ scroll-behavior:smooth; }
   color: var(--gold);
 }
 
+/* ===== Mobile: make + / - always fit ===== */
+@media (max-width: 420px){
+  /* remove the price line under the title */
+  .cart-price{ display:none; }
+
+  /* make title take less space if needed */
+  .cart-title{
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  /* tighten everything */
+  .cart-row{
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .cart-controls{
+    gap: 6px;
+  }
+
+  .qty-btn{
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+
+  .qty{
+    min-width: 16px;
+    font-size: 12px;
+  }
+}
+/* ===== Bottom drawer ===== */
+.totalbar{
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.totalbar-toggle{
+  all: unset;
+  cursor: pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chev{
+  font-weight: 1000;
+  transform: rotate(180deg);
+  transition: transform .2s ease;
+  opacity: .9;
+}
+
+/* Drawer hidden by default */
+.drawer{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease;
+}
+
+/* Open state */
+.totalbar.open .drawer{
+  max-height: 55vh;
+}
+
+.totalbar.open .chev{
+  transform: rotate(0deg);
+}
+
+.drawer-actions{
+  display:flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+/* Make list scroll inside drawer */
+.drawer .cart{
+  margin-top: 10px;
+  max-height: 45vh;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+@media (max-width: 420px){
+  .cart-price{ display:none; }
+  .cart-line-total{ display:none; } /* optional but helps a lot */
+  .qty-btn{ width: 26px; height: 26px; border-radius: 8px; }
+  .qty{ min-width: 16px; font-size: 12px; }
+  .cart-row{ gap: 6px; padding: 8px; }
+}
