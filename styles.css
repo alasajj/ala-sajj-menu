@@ -338,23 +338,6 @@ html{ scroll-behavior:smooth; }
   align-items: center;   /* THIS fixes the centering */
 }
 
-/* Layout spacing for fixed topbar */
-.container{
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 240px 14px 120px;
-}
-
-@media (min-width: 768px){
-  .container{ padding-top: 190px; }
-}
-
-/* Better anchor scroll position because topbar is fixed */
-.section{ scroll-margin-top: 260px; }
-
-@media (min-width: 768px){
-  .section{ scroll-margin-top: 200px; }
-}
 
 /* Prevent purple/blue visited-link colors */
 .section-btn,
@@ -421,13 +404,6 @@ html{ scroll-behavior:smooth; }
   padding-top: 24px;
 }
 
-:root{
-  --header-h: 240px; /* fallback */
-}
-
-.container{
-  padding-top: calc(var(--header-h) + 14px);
-}
 
 /* Anchor targets stop below the header */
 .section{
