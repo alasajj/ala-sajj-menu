@@ -25,14 +25,17 @@ body{
 }
 
 /* HEADER DEFAULT (BIG) */
-.topbar {
+.topbar{
   position: sticky;
   top: 0;
   z-index: 1000;
-
   background: black;
-  padding: 24px 16px;
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease;
+}
+
+/* hidden state: slide fully out of view */
+.topbar.hide-up{
+  transform: translateY(-110%);
 }
 
 /* LOGO DEFAULT SIZE */
@@ -47,28 +50,6 @@ body{
   transition: all 0.3s ease;
 }
 
-/* ============================= */
-/* SHRUNK STATE (ON SCROLL) */
-/* ============================= */
-
-.topbar.shrink {
-  padding: 8px 16px;
-}
-
-/* Smaller logo */
-.topbar.shrink .logo {
-  width: 110px;
-}
-
-/* Reduce nav spacing */
-.topbar.shrink .nav {
-  margin-top: 6px;
-}
-
-/* Optional: hide tagline when shrunk */
-.topbar.shrink .tagline {
-  display: none;
-}
 
 /* Layout */
 .container{

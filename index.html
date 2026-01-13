@@ -7,17 +7,6 @@
   <meta name="description" content="A LA SAJJ QR Menu" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<script>
-  const topbar = document.getElementById("topbar");
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 80) {
-      topbar.classList.add("shrink");
-    } else {
-      topbar.classList.remove("shrink");
-    }
-  });
-</script>
 
 <body>
   <div id="top"></div>
@@ -262,6 +251,20 @@
       setHeaderHeightVar();
     })();
   </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const topbar = document.getElementById("topbar");
+    if (!topbar) return;
+
+    function updateHeader() {
+      if (window.scrollY > 5) topbar.classList.add("hide-up");
+      else topbar.classList.remove("hide-up");
+    }
+
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    updateHeader(); // run once on load
+  });
+</script>
 
 </body>
 </html>
