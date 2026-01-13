@@ -9,6 +9,15 @@
 </head>
 
 <body>
+
+  <!-- Splash logo overlay -->
+  <div id="splash" class="splash" aria-hidden="true">
+    <img src="logo.png" alt="A LA SAJJ" class="splash-logo">
+    <span class="sparkle s1"></span>
+    <span class="sparkle s2"></span>
+    <span class="sparkle s3"></span>
+  </div>
+
   <div id="top"></div>
 
   <!-- Top logo only -->
@@ -336,6 +345,18 @@
     window.addEventListener("scroll", updateHeader, { passive: true });
     updateHeader(); // run once on load
   });
+</script>
+
+<script>
+  (function () {
+    const splash = document.getElementById("splash");
+    if (!splash) return;
+
+    setTimeout(() => {
+      splash.classList.add("hide");
+      setTimeout(() => splash.remove(), 450);
+    }, 2000);
+  })();
 </script>
 
 </body>
