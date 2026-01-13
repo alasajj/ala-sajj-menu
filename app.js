@@ -26,51 +26,140 @@ function updateTotal(){
   summaryEl.textContent = names.length > 3 ? `${summary}…` : summary;
 }
 
+// app.js
 document.addEventListener("DOMContentLoaded", () => {
-  const items = document.querySelectorAll(".item");
+  const itemButtons = document.querySelectorAll(".item");
+  const summaryEl = document.getElementById("summary");
+  const totalEl = document.getElementById("total");
+  const clearBtn = document.getElementById("clear");
+  const copyBtn = document.getElementById("copy");
 
-  items.forEach(btn => {
+  // cart: { "Zaatar Baladeh": { price: 90000, qty: 2 } }
+  const cart = {};
+
+  const fmt = (n) => Number(n).toLocaleString("en-US"); // 90,000 style
+
+  function totalAmount() {
+    let sum = 0;
+    for (const name in cart) {
+      sum += cart[name].price * cart[name].qty;
+    }
+    return sum;
+  }
+
+  function cartIsEmpty() {
+    return Object.keys(cart).length === 0;
+  }
+
+  function render() {
+    if (cartIsEmpty()) {
+      summaryEl.textContent = "No items selected";
+      totalEl.textContent = "0";
+      return;
+    }
+
+    // Build the list with - qty +
+    const rows = Object.entries(cart)
+      .map(([name, obj]) => {
+        return `
+          <div class="cart-row" data-name="${escapeHtml(name)}">
+            <div class="cart-name">
+              <div class="cart-title">${escapeHtml(name)}</div>
+              <div class="cart-price muted small">${fmt(obj.price)} each</div>
+            </div>
+
+            <div class="cart-controls">
+              <button class="qty-btn" type="button" data-action="minus" aria-label="Decrease">−</button>
+              <span class="qty">${obj.qty}</span>
+              <button class="qty-btn" type="button" data-action="plus" aria-label="Increase">+</button>
+            </div>
+
+            <div class="cart-line-total">${fmt(obj.price * obj.qty)}</div>
+          </div>
+        `;
+      })
+      .join("");
+
+    summaryEl.innerHTML = `<div class="cart">${rows}</div>`;
+    totalEl.textContent = fmt(totalAmount());
+  }
+
+  function addItem(name, price) {
+    if (!cart[name]) cart[name] = { price, qty: 0 };
+    cart[name].qty += 1;
+    render();
+  }
+
+  function changeQty(name, delta) {
+    if (!cart[name]) return;
+    cart[name].qty += delta;
+    if (cart[name].qty <= 0) delete cart[name];
+    render();
+  }
+
+  // Click on menu items => always +1
+  itemButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const name = btn.dataset.name;
-      const price = parseInt(btn.dataset.price, 10);
-
-      const isSelected = btn.classList.toggle("selected");
-
-      if (isSelected) selected.set(name, price);
-      else selected.delete(name);
-
-      updateTotal();
+      const price = Number(btn.dataset.price);
+      addItem(name, price);
     });
   });
 
-  document.getElementById("clear").addEventListener("click", () => {
-    selected.clear();
-    document.querySelectorAll(".item.selected").forEach(x => x.classList.remove("selected"));
-    updateTotal();
+  // Handle + / - clicks inside the summary area (event delegation)
+  summaryEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-action]");
+    if (!btn) return;
+
+    const row = e.target.closest(".cart-row");
+    if (!row) return;
+
+    const name = unescapeHtml(row.getAttribute("data-name"));
+    const action = btn.dataset.action;
+
+    if (action === "plus") changeQty(name, +1);
+    if (action === "minus") changeQty(name, -1);
   });
 
-  document.getElementById("copy").addEventListener("click", async () => {
-    if (selected.size === 0) return;
+  // Clear
+  clearBtn.addEventListener("click", () => {
+    for (const k in cart) delete cart[k];
+    render();
+  });
 
-    const lines = [];
-    let total = 0;
-    for (const [name, price] of selected.entries()){
-      total += price;
-      lines.push(`${name} — ${formatLBP(price)} LBP`);
-    }
+  // Copy order text
+  copyBtn.addEventListener("click", async () => {
+    if (cartIsEmpty()) return;
 
-    const text = `A LA SAJJ - Selection\n${lines.join("\n")}\nTotal: ${formatLBP(total)} LBP`;
+    const lines = Object.entries(cart).map(([name, obj]) => {
+      return `${obj.qty}x ${name} — ${fmt(obj.price * obj.qty)} LBP`;
+    });
 
-    try{
+    const text = `Order:\n${lines.join("\n")}\n\nTotal: ${fmt(totalAmount())} LBP`;
+
+    try {
       await navigator.clipboard.writeText(text);
-      const btn = document.getElementById("copy");
-      const old = btn.textContent;
-      btn.textContent = "Copied ✓";
-      setTimeout(() => (btn.textContent = old), 1200);
-    }catch{
-      alert("Copy not supported on this browser.");
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => (copyBtn.textContent = "Copy"), 900);
+    } catch {
+      // fallback
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
     }
   });
 
-  updateTotal();
+  // Helpers to safely store names in data attributes
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  }
+  function unescapeHtml(str) {
+    return str.replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&amp;/g, "&");
+  }
+
+  render();
 });
+
