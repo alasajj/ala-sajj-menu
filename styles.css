@@ -24,32 +24,50 @@ body{
     linear-gradient(180deg, #050505, #0a0a0a 35%, #060606);
 }
 
-/* Top */
-.topbar{
-  padding: 18px 14px 10px;
-  text-align:center;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  position: fixed;
+/* HEADER DEFAULT (BIG) */
+.topbar {
+  position: sticky;
   top: 0;
-  z-index: 10;
-  backdrop-filter: blur(10px);
-  background: rgba(8,8,8,.75);
+  z-index: 1000;
+
+  background: black;
+  padding: 24px 16px;
+  transition: all 0.3s ease;
 }
 
-.logo{
-  width: min(320px, 86vw);
-  height:auto;
-  display:block;
-  margin: 0 auto 8px;
-  filter: drop-shadow(0 12px 30px rgba(0,0,0,.55));
-  animation: floatIn .6s ease-out both;
+/* LOGO DEFAULT SIZE */
+.logo {
+  width: 180px;
+  transition: all 0.3s ease;
 }
-.tagline{
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  letter-spacing: .2px;
-  animation: floatIn .8s ease-out both;
+
+/* NAV SPACING */
+.nav {
+  margin-top: 16px;
+  transition: all 0.3s ease;
+}
+
+/* ============================= */
+/* SHRUNK STATE (ON SCROLL) */
+/* ============================= */
+
+.topbar.shrink {
+  padding: 8px 16px;
+}
+
+/* Smaller logo */
+.topbar.shrink .logo {
+  width: 110px;
+}
+
+/* Reduce nav spacing */
+.topbar.shrink .nav {
+  margin-top: 6px;
+}
+
+/* Optional: hide tagline when shrunk */
+.topbar.shrink .tagline {
+  display: none;
 }
 
 /* Layout */
